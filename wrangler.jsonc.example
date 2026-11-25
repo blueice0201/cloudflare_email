@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "cf-email2webhook",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-24",
+  "observability": {
+    "enabled": true,
+    // 实时 Issues（问题）：自动检测并分组重复出现的错误与异常。默认开启。
+    "issues": {
+      "enabled": true
+    }
+  },
+  // 运行时变量参数
+  "vars": {
+    "DELIVERY_MODE": "feishu_app", // 部署模式（转发模式）：feishu_app、feishu_webhook（默认）、dingding_webhook、wework_webhook
+    // --飞书自建应用--
+    "FEISHU_APP_ID": "",
+    "FEISHU_APP_SECRET": "",
+    "FEISHU_CHAT_ID": "",
+    // 邮箱转发地址映射："ops@example.com": "oc_replace_with_chat_id2"
+    "EMAIL_CHAT_MAP": {},
+    // Worker对外地址（如 https://cf-email2webhook.xxx.workers.dev）。设置后附件下载链接走本站 /download/:fileKey 代理，浏览器可直接下载；不设置则链接为飞书 OpenAPI 地址（需应用鉴权）。
+    "PUBLIC_BASE_URL": "",
+    // --飞书webhook--
+    "FEISHU_WEBHOOK_URL": "https://open.feishu.cn/open-apis/bot/v2/hook/replace-with-token",
+    // 飞书webhook加签密钥，为空时不做加签。
+    "FEISHU_SIGN_SECRET": "",
+    // 邮箱转发地址映射："ops@example.com": "https://open.feishu.cn/open-apis/bot/v2/hook/xxxx"
+    "EMAIL_FEISHU_MAP": {},
+    // --钉钉webhook--
+    "DINGTALK_WEBHOOK_URL": "https://oapi.dingtalk.com/robot/send?access_token=replace-with-access-token",
+    // 钉钉webhook加签密钥，为空时不做加签。
+    "DINGTALK_SIGN_SECRET": "",
+    // 邮箱转发地址映射
+    "EMAIL_DINGTALK_MAP": {},
+    // --企业微信webhook--
+    "WEWORK_WEBHOOK_URL": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=replace-with-key",
+    // 企业微信webhook加签密钥，为空时不做加签。
+    "WEWORK_SIGN_SECRET": "",
+    // 邮箱转发地址映射
+    "EMAIL_WEWORK_MAP": {}
+  }
+}
